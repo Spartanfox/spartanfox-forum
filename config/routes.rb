@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  resources :messages
 
   # Example resource route with options:
   #   resources :products do
@@ -53,6 +54,10 @@ Rails.application.routes.draw do
   #   end
   #   resources :posts, concerns: :toggleable
   #   resources :photos, concerns: :toggleable
+  resources :topic, path: 'topic' do
+    resources :message
+  end
+ #resources :topics
 
   # Example resource route within a namespace:
   #   namespace :admin do

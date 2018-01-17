@@ -31,7 +31,6 @@ GIT
       jquery-ui-rails (~> 5.0.3)
       kaminari
       mime-types (~> 2.3)
-      pg
       rails (~> 4.2.1)
       rails-observers
       redis
@@ -289,7 +288,7 @@ GEM
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    pg (1.0.0)
+    pg (0.21.0)
     phony (2.16.3)
     pry (0.11.3)
       coderay (~> 1.1.0)
@@ -438,7 +437,7 @@ DEPENDENCIES
   koi_config!
   newrelic_rpm
   ornament!
-  pg
+  pg (~> 0.18)
   pry-rails
   rack-mini-profiler
   rails (= 4.2.1)
