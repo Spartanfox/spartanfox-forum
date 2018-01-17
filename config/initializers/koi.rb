@@ -1,6 +1,8 @@
 Koi::Menu.items = {
   "Modules" => {
-
+    "Categories" => "/admin/categories",
+    "Downloads" => "/admin/downloads",
+    "Users" => "/admin/users",
   },
   "Advanced" => {
     "Admins"       => "/admin/site_users",

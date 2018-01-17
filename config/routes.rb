@@ -1,68 +1,33 @@
 Rails.application.routes.draw do
+  devise_for :users
+  namespace(:admin) do
+    resources :downloads do
+      collection { put "sort" }
+    end
+    resources :categories do
+      collection { put "sort" }
+    end
+    resources :users do
+      collection { put "sort" }
+    end
+  end
+
   resources :documents, only: [:show]
-  resources :images, only: [:show]
-  resources :assets, only: [:show]
-  resources :pages, only: [:index, :show], as: :koi_pages
-  root to: 'pages#index'
+  resources :images   , only: [:show]
+  resources :assets   , only: [:show]
+  resources :pages    , only: [:index, :show], as: :koi_pages
+  root to: 'application#index'
   mount Koi::Engine => "/admin", as: "koi_engine"
-  get "/:id"  => "pages#show", as: :page
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-  resources :messages
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
+  resources :categories, path: 'categories', only: [:index, :show] do
+    resources :topics
+  end
   resources :topic, path: 'topic' do
-    resources :message
+    resources :messages, only: [:new, :create, :show]
   end
  #resources :topics
+  resources :downloads , path: 'downloads' , only: [:index, :show]
 
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  #must be at bottom
+  get "/:id"  => "pages#show", as: :page
 end
