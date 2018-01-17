@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     resources :topics
   end
   resources :topic, path: 'topic' do
-    resources :messages, only: [:new, :create, :show]
+    resources :messages
   end
  #resources :topics
   resources :downloads , path: 'downloads' , only: [:index, :show]

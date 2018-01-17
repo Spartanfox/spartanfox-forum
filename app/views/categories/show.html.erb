@@ -1,0 +1,31 @@
+<% content_for :title, "Category" %>
+
+<p>
+  <strong>Title:</strong>
+  <%= @category.title %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%= @category.content.html_safe %>
+</p>
+
+<table id="forum">
+  <tr>
+    <th>
+      Topics
+      <br><%= link_to "Create new Topic", new_category_topic_path(@category) %>
+    </th>
+  </tr>
+  <% @category.topics.each do |topic| %>
+    <tr>
+      <td>
+        <b><%= topic.title%></b>
+        <b><%= link_to "Show topic", topics_path(topic) %></b>
+        <p><%= topic.content.html_safe %></p>
+      </td>
+    </tr>
+  <%end%>
+</table>
+<p>
+  <%= link_to "View All", categories_path %>
+</p>

@@ -1,0 +1,19 @@
+<% content_for :title, "Downloads" %>
+
+<table id="forum">
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Downloads Count</th>
+    <th>Info</th>
+  </tr>
+  <% @downloads.each do |download| %>
+    <tr>
+      <td><%= download.name %>               </td>
+      <td><%= download.download_type %>      </td>
+      <td><%= download.downloads_count %>    </td>
+      <td><%= download.info.html_safe %>     </td>
+      <td><%= link_to "Download", download %></td>
+    </tr>
+  <% end %>
+</table>

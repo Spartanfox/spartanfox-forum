@@ -1,0 +1,15 @@
+<% content_for :title, "Categories" %>
+
+<table id="forum">
+  <tr>
+    <th>Title</th>
+  </tr>
+  <% @categories.each do |category| %>
+    <tr>
+      <td>
+        <b><%= link_to category.title, category_topics_path(category) %></b>
+        <p><%= category.content.html_safe %></p>
+      </td>
+    </tr>
+  <% end %>
+</table>

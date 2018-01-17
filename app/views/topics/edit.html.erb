@@ -1,0 +1,8 @@
+<% content_for :title, "Edit Topic" %>
+
+<%= render "form" %>
+
+<p>
+  <%= link_to "Show", category_topic_path(@category, @topic) %> |
+  <%= link_to "View All", category_topics_path(@category) %>
+</p>
