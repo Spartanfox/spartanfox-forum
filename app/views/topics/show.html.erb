@@ -9,21 +9,34 @@
   <%= @topic.content %>
 </p>
 
-<table id="forum">
+<table id="forum" data-forum>
   <tr>
     <th>
       Comments
-      <br><%= link_to "Create new Message", new_topic_message_path(@topic) %>
     </th>
   </tr>
-
   <% @topic.messages.each do |message| %>
     <tr>
       <td>
-        <b><%= message.content%></><br>
-        <small>by <%= get_username(message) %></small>
-
+        <b><%= message.content%></b><br>
+        <small>by <%= get_username(message)%> on <%= get_date(message)%></small>
       </td>
     </tr>
+
   <%end%>
+</table>
+<table id="forum">
+  <tr>
+    <th>
+      <p>
+        Comment as <%= username%>
+        <br>
+        <div message-form>
+          <%#should be in controller probs%>
+          <% @message = Message.new(topic_id: @topic.id)%>
+          <%= render 'messages/form'%>
+        </div>
+      </p>
+    </th>
+  </tr>
 </table>

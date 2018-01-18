@@ -13,7 +13,7 @@
       <td><%= topic.content %></td>
       <td><%= link_to "Show", category_topic_path(@category,topic) %></td>
       <td><%= link_to "Edit", edit_category_topic_path(@category,topic) %></td>
-      <td><%= link_to "Destroy", category_topic_path(@category,topic), :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to "Destroy", category_topic_path(@category,topic), method: :delete, data: {confirm: 'Are you sure?'}%></td>
     </tr>
   <% end %>
 </table>

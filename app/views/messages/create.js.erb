@@ -1,0 +1,7 @@
+console.log("create.js.erb file");
+
+  <%if @message.persisted?%>
+    $("[data-forum]").append("<tr><td><b><%= @message.content%></b><br><small>by <%= get_username(@message)%> on <%= get_date(@message)%></small></td></tr>");
+    <%@message = Message.new(topic_id: @topic.id)%>
+  <%end%>
+  $("[message-form]").html("<%= escape_javascript(render 'messages/form')%>");

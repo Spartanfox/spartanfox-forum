@@ -19,13 +19,12 @@ Rails.application.routes.draw do
   root to: 'application#index'
   mount Koi::Engine => "/admin", as: "koi_engine"
 
-  resources :categories, path: 'categories', only: [:index, :show] do
+  resources :categories, path: 'forum', only: [:index, :show] do
     resources :topics
   end
   resources :topic, path: 'topic' do
     resources :messages
   end
- #resources :topics
   resources :downloads , path: 'downloads' , only: [:index, :show]
 
   #must be at bottom
