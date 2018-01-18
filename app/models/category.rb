@@ -10,7 +10,7 @@ class Category < ActiveRecord::Base
     config :admin do
       actions only:  [:index, :show, :new, :edit]
       index fields: [:title, :content],
-            #relations: [:topics],
+            relations: [:topics],
             order:  { created_at: :desc }
       form  fields: [:title, :content]
       csv   fields: [:title, :content]

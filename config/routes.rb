@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  namespace(:admin) { resources :messages }
+  namespace(:admin) { resources :topics }
   devise_for :users
   namespace(:admin) do
     resources :downloads do
@@ -6,6 +8,9 @@ Rails.application.routes.draw do
     end
     resources :categories do
       collection { put "sort" }
+      resources :topics do
+        resources :messages
+      end
     end
     resources :users do
       collection { put "sort" }

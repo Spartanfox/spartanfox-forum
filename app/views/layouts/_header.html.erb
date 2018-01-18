@@ -2,7 +2,7 @@
   <div>
     <nav>
       <% if notice %>
-          <p><%= notice  %></p>
+          <p><%= notice %></p>
       <% end %>
       <% if alert %>
           <p><%= alert %></p>
@@ -16,21 +16,16 @@
     <nav style="background: black">
       <ul>
         <h1>Spartanfox Productions</h1>
-            <% if user_signed_in? %>
-                Logged in as <strong><%= current_user.username %></strong>
-            <%end%>
+          <% if user_signed_in? %>
+            Logged in as <strong><%= current_user.username %></strong>
+            <%= link_to 'Edit profile', edit_user_registration_path%>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete%>
+          <%else%>
+            <%= link_to "Sign up", new_user_registration_path%>
+            <%= link_to "Login"  , new_user_session_path     %>
+          <%end%>
+            <%= koi_render_navigation "header_nav", "header_navigation", renderer: :sf_menu, level: 1, expand_all: true, dom_class: '' %>
       </ul>
-      <ul style="color:white">
-      <%= link_to 'Forum', categories_path%>
-      <%= link_to 'Downloads', downloads_path%>
-      <%if user_signed_in?%>
-        <%= link_to 'Edit profile', edit_user_registration_path%>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete%>
-      <%else%>
-        <%= link_to "Sign up", new_user_registration_path%>
-        <%= link_to "Login"  , new_user_session_path     %>
-      <%end%>
-    </ul>
     </nav>
   </div>
   <div>
