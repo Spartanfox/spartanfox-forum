@@ -4,5 +4,4 @@ class CategoriesController < CrudController
     @categories = Category.ordered
   end
 
-
 end

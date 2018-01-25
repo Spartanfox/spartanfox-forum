@@ -22,8 +22,16 @@ class MessagesController < CrudController
     end
   end
   def rate
-
+    @topic = parent
+    @message = parent.messages.find(params[:message_id])
+    unless cookies[@message.id.to_s] == "liked"
+      cookies[@message.id.to_s] = "liked"
+      @message.rating += 1
+      @message.save
+    end
+    redirect_to :back
   end
+
   private
 
   def permitted_params

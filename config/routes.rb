@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   end
   resources :topic, path: 'topic' do
     resources :messages do
-      get 'rate', as: :rate
+      get 'rate'
 end
   end
   resources :downloads , path: 'downloads' , only: [:index, :show]

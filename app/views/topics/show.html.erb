@@ -15,17 +15,9 @@
       Comments
     </th>
   </tr>
-  <% @topic.messages.each do |message| %>
-    <tr>
-      <td>
-        <b><%= message.content%></b><br>
-        <small>
-          by <%= get_username(message)%>
-          on <%= get_date(message)%>
-          <%= link_to "like", topic_message_rate_path %>
-        </small>
-      </td>
-    </tr>
+  <% @topic.messages.sort{|a,b| a.created_at <=> b.created_at}.each do |message| %>
+    <% @message = message%>
+    <%= render 'messages/message'%>
   <%end%>
 </table>
 <table id="forum">

@@ -1,0 +1,5 @@
+console.log("rate.js.erb file");
+
+<%if @message.persisted?%>
+  $("message=<%=@message.id_to_s%>").append("commint");
+<%end%>

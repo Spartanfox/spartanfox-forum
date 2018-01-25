@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20180125041008) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "rating"
+    t.integer  "rating",     default: 0
   end
 
   add_index "messages", ["slug"], name: "index_messages_on_slug", unique: true, using: :btree

@@ -1,0 +1,14 @@
+<tr>
+  <td>
+    <div message="<%="#{@message.id}"%>">
+    <b><%= @message.content%></b><br>
+    <small>
+      by <%= get_username(@message)%>
+      on <%= get_date(@message)%>
+      <%= @message.rating %>
+      <%= link_to "like", topic_message_rate_path(@topic, @message) %>
+    </small>
+  </div>
+
+  </td>
+</tr>
