@@ -19,7 +19,11 @@
     <tr>
       <td>
         <b><%= message.content%></b><br>
-        <small>by <%= get_username(message)%> on <%= get_date(message)%></small>
+        <small>
+          by <%= get_username(message)%>
+          on <%= get_date(message)%>
+          <%= link_to "like", topic_message_rate_path %>
+        </small>
       </td>
     </tr>
   <%end%>
@@ -31,7 +35,6 @@
         Comment as <%= username%>
         <br>
         <div message-form>
-          <%#should be in controller probs%>
           <% @message = Message.new(topic_id: @topic.id)%>
           <%= render 'messages/form'%>
         </div>

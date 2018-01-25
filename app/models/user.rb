@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
 
     config :admin do
       actions only: [:index, :show, :new, :edit]
-      index fields: [:email],
+      index fields: [:username, :email],
+            relations: [:messages],
             order:  { created_at: :desc }
       form  fields: [:email, :username]
       csv   fields: [:email, :username]

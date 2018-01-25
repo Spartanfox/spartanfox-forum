@@ -9,11 +9,11 @@ class Message < ActiveRecord::Base
   validates_length_of :content, :maximum => 500
 
   crud.config do
-    fields   content: { type: :rich_text }
-
+    fields   content: { type: :rich_text },
+            topic_id: { type: :topic}
     config :admin do
       actions only:  [:index, :show, :new, :edit]
-      index fields: [:content],
+      index fields: [:topic_id, :content],
             order:  { created_at: :desc }
       form  fields: [ :content]
       csv   fields: [ :content]

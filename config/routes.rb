@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  namespace(:admin) { resources :messages }
-  namespace(:admin) { resources :topics }
   devise_for :users
   namespace(:admin) do
     resources :downloads do
@@ -9,11 +7,17 @@ Rails.application.routes.draw do
     resources :categories do
       collection { put "sort" }
       resources :topics do
+        collection { put "sort" }
         resources :messages
       end
     end
+    resources :topics do
+      collection { put "sort" }
+      resources :messages
+    end
     resources :users do
       collection { put "sort" }
+      resources :messages
     end
   end
 
@@ -28,7 +32,9 @@ Rails.application.routes.draw do
     resources :topics
   end
   resources :topic, path: 'topic' do
-    resources :messages
+    resources :messages do
+      get 'rate', as: :rate
+end
   end
   resources :downloads , path: 'downloads' , only: [:index, :show]
 

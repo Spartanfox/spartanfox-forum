@@ -11,9 +11,9 @@ class MessagesController < CrudController
     end
     respond_to do |format|
       if @message.save
-         format.html { redirect_to @message.post, notice: 'Message sent' }
-         format.js   { }
-         format.json { render :show, status: :created, location: @message }
+        format.html { redirect_to @message.post, notice: 'Message sent' }
+        format.js   { }
+        format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }
         format.js   { }
@@ -21,23 +21,9 @@ class MessagesController < CrudController
       end
     end
   end
+  def rate
 
-
-#def create
-#    @comment = Comment.new(comment_params)
-#
-#  respond_to do |format|
-#      if @comment.save
-#        format.html { redirect_to @comment.post, notice: 'Comment was successfully created.' }
-#        format.js   { }
-#        format.json { render :show, status: :created, location: @comment }
-#      else
-#        format.html { render :new }
-#        format.json { render json: @comment.errors, status: :unprocessable_entity }
-#      end
-#    end
-#  end
-
+  end
   private
 
   def permitted_params
