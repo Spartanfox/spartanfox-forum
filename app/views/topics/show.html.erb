@@ -1,13 +1,20 @@
 <% content_for :title, "Topic" %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @topic.title %>
-</p>
-<p>
-  <strong>Content:</strong>
-  <%= @topic.content %>
-</p>
+<table id="forum">
+  <tr>
+    <th>
+      <%= @topic.title%>
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <p><%= @topic.content%></p>
+      <small>
+        <%= get_date(@topic)%>
+      </small>
+    </td>
+  </tr>
+</table>
 
 <table id="forum" data-forum>
   <tr>
@@ -16,10 +23,10 @@
     </th>
   </tr>
   <% @topic.messages.sort{|a,b| a.created_at <=> b.created_at}.each do |message| %>
-    <% @message = message%>
-    <%= render 'messages/message'%>
+    <%= render 'messages/message', message: message%>
   <%end%>
 </table>
+
 <table id="forum">
   <tr>
     <th>

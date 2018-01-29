@@ -1,7 +1,9 @@
-console.log("rate.js.erb file");
+console.log("request_reply.js.erb file");
 
 $("[data-forum]").html("<tr><th>Comments</th></tr>");
 <% @messages.sort{|a,b| a.created_at <=> b.created_at}.each do |message|%>
   $("[data-forum]").append("<%= escape_javascript(render 'messages/message', message: message)%>");
 <%end%>
-<%#"[message='<%= escape_javascript(@message.id.to_s)%>
+
+$("[message='<%= escape_javascript(@message.message_id.to_s)%>']").find("[reply]")
+  .html("<%= escape_javascript(render 'messages/form')%>");

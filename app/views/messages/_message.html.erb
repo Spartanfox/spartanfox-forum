@@ -1,14 +1,20 @@
 <tr>
   <td>
-    <div message="<%="#{@message.id}"%>">
-    <b><%= @message.content%></b><br>
-    <small>
-      by <%= get_username(@message)%>
-      on <%= get_date(@message)%>
-      <%= @message.rating %>
-      <%= link_to "like", topic_message_rate_path(@topic, @message) %>
-    </small>
-  </div>
-
+    <div message="<%="#{message.id}"%>">
+      <small>
+        <b><%= get_username(message)%></b>
+        on <%= get_date(message)%>
+      </small>
+      <p><%= message.content%></p>
+      <%= message.rating %>
+      <%if liked(message)%>
+        <small>Liked</small>
+      <%else%>
+        <%= link_to "Like", topic_message_rate_path(@topic, message), remote: true %>
+      <%end%>
+      <span reply>
+        <%= link_to "Reply", topic_message_request_reply_path(@topic, message), remote: true %>
+      </span>
+    </div>
   </td>
 </tr>

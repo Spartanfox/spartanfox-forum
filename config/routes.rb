@@ -34,7 +34,9 @@ Rails.application.routes.draw do
   resources :topic, path: 'topic' do
     resources :messages do
       get 'rate'
-end
+      get 'reply'
+      get 'request_reply'
+    end
   end
   resources :downloads , path: 'downloads' , only: [:index, :show]
 

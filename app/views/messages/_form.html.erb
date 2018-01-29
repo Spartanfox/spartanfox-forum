@@ -2,6 +2,7 @@
   <%= f.error_notification %>
   <div class="inputs">
     <%= f.input :content , label: "Message"%>
+    <%= f.input :message_id, as: :hidden, value: @message.message_id%>
   </div>
   <div class="actions">
     <%= f.button :submit %>

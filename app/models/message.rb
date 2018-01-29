@@ -3,6 +3,7 @@ class Message < ActiveRecord::Base
   has_crud
   belongs_to :topic
   belongs_to :user
+  belongs_to :message
 
   validates_presence_of :content
   validates_length_of :content, :minimum => 2
@@ -19,6 +20,4 @@ class Message < ActiveRecord::Base
       csv   fields: [ :content]
     end
   end
-
-
 end

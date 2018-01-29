@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125041008) do
+ActiveRecord::Schema.define(version: 20180129044330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20180125041008) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "rating",     default: 0
+    t.integer  "message_id"
   end
 
   add_index "messages", ["slug"], name: "index_messages_on_slug", unique: true, using: :btree
@@ -236,6 +237,7 @@ ActiveRecord::Schema.define(version: 20180125041008) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
+  add_foreign_key "messages", "messages"
   add_foreign_key "messages", "topics"
   add_foreign_key "messages", "users"
   add_foreign_key "topics", "categories"
