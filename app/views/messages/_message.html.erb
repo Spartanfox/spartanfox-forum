@@ -1,20 +1,28 @@
 <tr>
   <td>
-    <div message="<%="#{message.id}"%>">
+    <div message="<%= @reply.id %>">
       <small>
-        <b><%= get_username(message)%></b>
-        on <%= get_date(message)%>
+        <b><%= get_username(@reply) %></b> on <%= get_date(@reply) %>
       </small>
-      <p><%= message.content%></p>
-      <%= message.rating %>
-      <%if liked(message)%>
-        <small>Liked</small>
-      <%else%>
-        <%= link_to "Like", topic_message_rate_path(@topic, message), remote: true %>
-      <%end%>
-      <span reply>
-        <%= link_to "Reply", topic_message_request_reply_path(@topic, message), remote: true %>
+      <p><%= @reply.content %></p>
+      <%= @reply.rating %>
+      <span like="<%= @reply.id %>">
+        <% if liked(@reply) %>
+          <small>Liked</small>
+        <% else %>
+          <%= link_to "Like" , topic_message_rate_path( @topic, @reply), remote: true %>
+        <% end %>
       </span>
+      <%= link_to "Reply", topic_message_reply_path(@topic, @reply), remote: true %>
+
+      <span reply="<%= @reply.id %>" reply>
+      </span>
+      <div>
+        <table id="reply" replies="<%= @reply.id %>">
+          <%= link_to "View replies", topic_message_view_replies_path(@topic, @reply), remote: true %>
+        </table>
+      </div>
     </div>
+
   </td>
 </tr>

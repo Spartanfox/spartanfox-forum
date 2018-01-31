@@ -3,14 +3,14 @@
 <table id="forum">
   <tr>
     <th>
-      <%= @topic.title%>
+      <%= @topic.title %>
     </th>
   </tr>
   <tr>
     <td>
-      <p><%= @topic.content%></p>
+      <p><%= @topic.content %></p>
       <small>
-        <%= get_date(@topic)%>
+        <%= get_date(@topic) %>
       </small>
     </td>
   </tr>
@@ -23,19 +23,22 @@
     </th>
   </tr>
   <% @topic.messages.sort{|a,b| a.created_at <=> b.created_at}.each do |message| %>
-    <%= render 'messages/message', message: message%>
-  <%end%>
+    <% unless message.is_reply? %>
+      <%@reply = message%>
+      <%= render 'messages/message'%>
+    <% end %>
+  <% end %>
 </table>
 
 <table id="forum">
   <tr>
     <th>
       <p>
-        Comment as <%= username%>
+        Comment as <%= username %>
         <br>
         <div message-form>
-          <% @message = Message.new(topic_id: @topic.id)%>
-          <%= render 'messages/form'%>
+          <% @message = Message.new(topic_id: @topic.id) %>
+          <%= render 'messages/form' %>
         </div>
       </p>
     </th>

@@ -1,23 +1,22 @@
 class MessagesController < CrudController
 
   belongs_to :topic
-
   def create
     @topic    = parent
-    @message  = parent.messages.build(permitted_params[:message])
-    @messages = parent.messages
+    @reply  = parent.messages.build(permitted_params[:message])
+    @message = @reply.message
+    @messages = parent.messages.replies(@message).sort{|a,b| a.created_at <=> b.created_at}
     if user_signed_in?
-      @message.user = current_user
+      @reply.user = current_user
     end
 
     respond_to do |format|
-      if @message.save
-        @message = Message.new(topic_id: @topic.id)
+      if @reply.save
+        @messages = parent.messages.replies(@message).sort{|a,b| a.created_at <=> b.created_at}
         format.html { redirect_to @message.post, notice: 'Message sent' }
         format.js   { }
         format.json { render :show, status: :created, location: @message }
       else
-        puts "message not saved"
         format.html { render :new }
         format.js   { }
         format.json { render json: @message.errors, status: :unprocessable_entity}
@@ -39,16 +38,26 @@ class MessagesController < CrudController
       end
     end
   end
-  def request_reply
+
+  def reply
     @topic    = parent
     @message  = Message.new(topic_id: @topic.id)
-    @messages = parent.messages
-
+    #@messages = parent.messages
     @message.message = parent.messages.find(params[:message_id])
     respond_to do |format|
       format.js { }
     end
   end
+
+  def view_replies
+    @topic    = parent
+    @message  = parent.messages.find(params[:message_id])
+    @messages = parent.messages.replies(@message).sort{|a,b| a.created_at <=> b.created_at}
+    respond_to do |format|
+      format.js { }
+    end
+  end
+
   private
 
   def permitted_params

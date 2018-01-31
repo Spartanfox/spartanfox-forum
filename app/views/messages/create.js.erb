@@ -1,6 +1,16 @@
 console.log("create.js.erb file");
+<% if @reply.is_reply? %>
+  $("[replies='<%= escape_javascript(@message.id.to_s)%>']").html(" ");
+  <% @messages.each do |message| %>
+      <%@reply = message%>
+      $("[replies='<%= escape_javascript(@message.id.to_s)%>']")
+      .append("<%= escape_javascript(render 'messages/message')%>");
+  <% end %>
+<% else %>
+  <% puts "Message new" %>
+  $("[data-forum]").append("<%= escape_javascript(render 'messages/message')%>");
+<% end %>
+
+<% @message = Message.new(topic_id: @topic.id) %>
+$("[reply]").html("");
 $("[message-form]").html("<%= escape_javascript(render 'messages/form')%>");
-$("[data-forum]").html("<tr><th>Comments</th></tr>");
-<% @messages.sort{|a,b| a.created_at <=> b.created_at}.each do |message|%>
-  $("[data-forum]").append("<%= escape_javascript(render 'messages/message', message: message)%>");
-<%end%>

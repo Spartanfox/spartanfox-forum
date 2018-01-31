@@ -1,8 +1,10 @@
 <%= simple_form_for [@topic,@message], remote: true do |f| %>
   <%= f.error_notification %>
   <div class="inputs">
-    <%= f.input :content , label: "Message"%>
-    <%= f.input :message_id, as: :hidden, value: @message.message_id%>
+    <%= f.input :content , label: "Message" %>
+    <% if @message.message %>
+      <%= f.input :message_id, as: :hidden, value: @message.message_id %>
+    <% end %>
   </div>
   <div class="actions">
     <%= f.button :submit %>

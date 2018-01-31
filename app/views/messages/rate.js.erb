@@ -1,7 +1,8 @@
 console.log("rate.js.erb file");
 
 $("[data-forum]").html("<tr><th>Comments</th></tr>");
-<% @messages.sort{|a,b| a.created_at <=> b.created_at}.each do |message|%>
-  $("[data-forum]").append("<%= escape_javascript(render 'messages/message', message: message)%>");
-<%end%>
-<%#"[message='<%= escape_javascript(@message.id.to_s)%>
+<% @messages.sort{|a,b| a.created_at <=> b.created_at}.each do |message| %>
+  <% unless message.is_reply? %>
+    $("[data-forum]").append("<%= escape_javascript(render 'messages/message', message: message) %>");
+  <% end %>
+<% end %>
