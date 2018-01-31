@@ -1,0 +1,7 @@
+console.log("view_reply.js.erb file");
+$("[replies='<%= escape_javascript(@message.id.to_s)%>']").html(" ");
+<% @messages.each do |message| %>
+    <%@reply = message%>
+    $("[replies='<%= escape_javascript(@message.id.to_s)%>']")
+    .append("<%= escape_javascript(render 'messages/message')%>");
+<% end %>
