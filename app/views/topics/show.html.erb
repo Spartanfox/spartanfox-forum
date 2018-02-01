@@ -37,7 +37,7 @@
         Comment as <%= username %>
         <br>
         <div message-form>
-          <% @message = Message.new(topic_id: @topic.id) %>
+          <% @reply = Message.new(topic_id: @topic.id) %>
           <%= render 'messages/form' %>
         </div>
       </p>

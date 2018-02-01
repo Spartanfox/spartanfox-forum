@@ -5,8 +5,8 @@
         <b><%= get_username(@reply) %></b> on <%= get_date(@reply) %>
       </small>
       <p><%= @reply.content %></p>
-      <%= @reply.rating %>
       <span like="<%= @reply.id %>">
+        <%= @reply.rating %>
         <% if liked(@reply) %>
           <small>Liked</small>
         <% else %>
@@ -14,7 +14,6 @@
         <% end %>
       </span>
       <%= link_to "Reply", topic_message_reply_path(@topic, @reply), remote: true %>
-
       <span reply="<%= @reply.id %>" reply>
       </span>
       <div>
@@ -23,6 +22,5 @@
         </table>
       </div>
     </div>
-
   </td>
 </tr>

@@ -1,8 +1,3 @@
 console.log("rate.js.erb file");
 
-$("[data-forum]").html("<tr><th>Comments</th></tr>");
-<% @messages.sort{|a,b| a.created_at <=> b.created_at}.each do |message| %>
-  <% unless message.is_reply? %>
-    $("[data-forum]").append("<%= escape_javascript(render 'messages/message', message: message) %>");
-  <% end %>
-<% end %>
+$("[like='<%= escape_javascript(@reply.id.to_s)%>']").html("<%= @reply.rating%> Liked");

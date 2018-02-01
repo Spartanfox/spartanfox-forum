@@ -1,9 +1,9 @@
-<%= simple_form_for [@topic,@message], remote: true do |f| %>
+<%= simple_form_for [@topic,@reply], remote: true do |f| %>
   <%= f.error_notification %>
   <div class="inputs">
     <%= f.input :content , label: "Message" %>
-    <% if @message.message %>
-      <%= f.input :message_id, as: :hidden, value: @message.message_id %>
+    <% if @reply.message %>
+      <%= f.input :message_id, as: :hidden, value: @reply.message_id %>
     <% end %>
   </div>
   <div class="actions">

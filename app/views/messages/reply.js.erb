@@ -1,4 +1,4 @@
 console.log("reply.js.erb file");
 $("[reply]").html("");
-$("[reply='<%= escape_javascript(@message.message_id.to_s)%>']")
+$("[reply='<%= escape_javascript(@message.id.to_s)%>']")
   .html("<%= escape_javascript(render 'messages/form')%>");

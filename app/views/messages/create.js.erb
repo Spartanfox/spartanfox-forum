@@ -1,16 +1,22 @@
 console.log("create.js.erb file");
-<% if @reply.is_reply? %>
-  $("[replies='<%= escape_javascript(@message.id.to_s)%>']").html(" ");
-  <% @messages.each do |message| %>
-      <%@reply = message%>
-      $("[replies='<%= escape_javascript(@message.id.to_s)%>']")
-      .append("<%= escape_javascript(render 'messages/message')%>");
+<% if @reply.persisted? %>
+  <% if @reply.is_reply? %>
+    $("[reply]").html("");
+    $("[replies='<%= escape_javascript(@message.id.to_s)%>']").html(" ");
+    <% @messages.each do |message| %>
+        <%@reply = message%>
+        $("[replies='<%= escape_javascript(@message.id.to_s)%>']")
+        .append("<%= escape_javascript(render 'messages/message')%>");
+    <% end %>
+  <% else %>
+    $("[data-forum]").append("<%= escape_javascript(render 'messages/message')%>");
   <% end %>
+  <% @reply = Message.new(topic_id: @topic.id) %>
+  $("[message-form]").html("<%= escape_javascript(render 'messages/form')%>");
 <% else %>
-  <% puts "Message new" %>
-  $("[data-forum]").append("<%= escape_javascript(render 'messages/message')%>");
+  <% if @reply.is_reply? %>
+    $("[reply]").html("");
+    $("[reply='<%= escape_javascript(@message.id.to_s)%>']")
+      .html("<%= escape_javascript(render 'messages/form')%>");
+  <% end %>
 <% end %>
-
-<% @message = Message.new(topic_id: @topic.id) %>
-$("[reply]").html("");
-$("[message-form]").html("<%= escape_javascript(render 'messages/form')%>");
